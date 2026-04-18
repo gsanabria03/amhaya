@@ -3,114 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mecánico | Contacto</title>
+  <title>Amhaya | Mecánico</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #0f172a;
+      background: #000000;
       color: #e5e7eb;
     }
+
     header {
-      background: #020617;
-      padding: 20px;
-      text-align: center;
-      border-bottom: 2px solid #1e293b;
+      background: #111111;
+      padding: 15px 20px;
+      border-bottom: 3px solid #ffcc00;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    header h1 {
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+
+    .logo h1 {
       margin: 0;
-      color: #38bdf8;
+      color: #ffcc00;
+      font-size: 26px;
+      letter-spacing: 1px;
     }
+
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(180deg, #000000, #111111);
+    }
+
+    .hero h2 {
+      font-size: 32px;
+      color: #ffcc00;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #9ca3af;
+      font-size: 18px;
+    }
+
     .container {
       padding: 20px;
       max-width: 900px;
       margin: auto;
     }
+
     .card {
-      background: #020617;
+      background: #111111;
       padding: 20px;
       border-radius: 12px;
       margin-bottom: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      box-shadow: 0 0 20px rgba(255,204,0,0.1);
+      border: 1px solid #1f1f1f;
     }
+
     h2 {
-      color: #38bdf8;
+      color: #ffcc00;
     }
+
     .services span {
       display: inline-block;
-      background: #1e293b;
+      background: #1f1f1f;
       padding: 10px;
       border-radius: 8px;
       margin: 5px;
+      border: 1px solid #ffcc00;
+      font-size: 14px;
     }
+
     .links a {
       display: block;
       margin: 10px 0;
       text-decoration: none;
       color: white;
-      background: #1e293b;
+      background: #1f1f1f;
       padding: 12px;
       border-radius: 8px;
       text-align: center;
       transition: 0.3s;
+      border: 1px solid #333;
     }
+
     .links a:hover {
-      background: #334155;
+      background: #ffcc00;
+      color: #000;
     }
+
     .whatsapp-btn {
       display: block;
       text-align: center;
-      background: #22c55e;
-      color: white;
+      background: #ffcc00;
+      color: black;
       padding: 15px;
       border-radius: 10px;
       text-decoration: none;
       font-size: 18px;
       margin-top: 20px;
+      font-weight: bold;
       transition: 0.3s;
     }
+
     .whatsapp-btn:hover {
-      background: #16a34a;
+      background: #e6b800;
     }
+
     .floating-btn {
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: #22c55e;
-      color: white;
+      background: #ffcc00;
+      color: black;
       padding: 15px 25px;
       border-radius: 50px;
       text-decoration: none;
       font-size: 16px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(255,204,0,0.5);
       z-index: 1000;
       transition: 0.3s;
     }
+
     .floating-btn:hover {
-      background: #16a34a;
+      background: #e6b800;
     }
+
     footer {
       text-align: center;
       padding: 20px;
       font-size: 14px;
-      color: #94a3b8;
+      color: #6b7280;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Mecánico de Confianza</h1>
-  <p>Reparaciones rápidas, honestas y profesionales</p>
+  <div class="logo">
+    <!-- PON TU LOGO AQUÍ -->
+    <img src="logo.png" alt="Amhaya Logo">
+    <h1>AMHAYA</h1>
+  </div>
 </header>
+
+<div class="hero">
+  <h2>Tu mecánico de confianza en la zona</h2>
+  <p>Rápido, honesto y sin complicaciones. Atendemos tu carro como se debe.</p>
+</div>
 
 <div class="container">
 
   <div class="card">
     <h2>📍 Zona de Servicio</h2>
-    <p>Atendemos exclusivamente en las zonas de <strong>Pembroke Pines</strong> y <strong>Hollywood, Florida</strong>.</p>
-    <p>Servicio confiable, rápido y con atención personalizada en tu área.</p>
+    <p>Atendemos exclusivamente en <strong>Pembroke Pines</strong> y <strong>Hollywood, Florida</strong>.</p>
+    <p>Servicio local, confiable y con atención directa.</p>
   </div>
 
   <div class="card">
@@ -126,35 +187,33 @@
 
   <div class="card">
     <h2>📲 Nuestras Redes</h2>
-    <p>Síguenos y contáctanos directamente:</p>
+    <p>Síguenos o contáctanos directo:</p>
     <div class="links">
-      <!-- LINK TIKTOK -->
       <a href="#" target="_blank">Ver TikTok</a>
-
-      <!-- LINK WHATSAPP -->
       <a href="#" target="_blank">Escribir por WhatsApp</a>
     </div>
   </div>
 
   <div class="card">
     <h2>📞 Contacto</h2>
-    <p>¿Necesitas ayuda con tu vehículo? Escríbenos directamente por WhatsApp y recibe atención rápida.</p>
-
+    <p>¿Problemas con tu carro? Escríbenos ahora mismo.</p>
+    <a class="whatsapp-btn" href="#" target="_blank">
+      Contactar por WhatsApp
+    </a>
   </div>
 
 </div>
 
 <footer>
-  <p>© 2026 Mecánico Local | Pembroke Pines & Hollywood FL</p>
+  <p>© 2026 AMHAYA | Mecánico en Pembroke Pines & Hollywood FL</p>
 </footer>
 
-<!-- BOTÓN FIJO FINAL -->
-<a class="floating-btn" href="https://wa.me/+13475539327" target="_blank">
-  💬 Contáctanos por WhatsApp
+<a class="floating-btn" href="#" target="_blank">
+  💬 Contáctanos
 </a>
 
 <script>
-  console.log("Página cargada correctamente");
+  console.log("AMHAYA listo 🚗");
 </script>
 
 </body>
