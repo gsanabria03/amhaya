@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>AMHAYA | Dashboard</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #000;
+  color: white;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  color: #ffcc00;
+}
+
+.card {
+  background: #111;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 10px;
+  border: 1px solid #222;
+}
+
+input, select {
+  padding: 10px;
+  margin-top: 10px;
+  width: 100%;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: white;
+  border-radius: 8px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  background: #ffcc00;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.item {
+  padding: 10px;
+  border-bottom: 1px solid #222;
+}
+
+.badge {
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  background: #22c55e;
+  color: black;
+}
+
+.delete {
+  background: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  float: right;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📊 Dashboard AMHAYA</h1>
+
+<!-- selector -->
+<div class="card">
+  <h3>Seleccionar fecha</h3>
+  <input type="date" id="date" onchange="load()">
+</div>
+
+<!-- list -->
+<div class="card">
+  <h3>Citas del día</h3>
+  <div id="list"></div>
+</div>
+
+<!-- manual add -->
+<div class="card">
+  <h3>Agregar cita manual</h3>
+
+  <input id="nombre" placeholder="Nombre">
+  <input id="telefono" placeholder="Teléfono">
+  <input id="hora" placeholder="Hora (ej: 10:00)">
+
+  <button onclick="addManual()">Agregar</button>
+</div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "TU_API",
+  authDomain: "TU_AUTH",
+  databaseURL: "TU_DB",
+  projectId: "TU_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+let currentDate = null;
+
+function load() {
+  currentDate = document.getElementById("date").value;
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+
+  db.ref("citas/" + currentDate).once("value", snap => {
+    const data = snap.val();
+
+    if (!data) {
+      list.innerHTML = "No hay citas";
+      return;
+    }
+
+    Object.keys(data).forEach(time => {
+      const c = data[time];
+
+      const div = document.createElement("div");
+      div.className = "item";
+
+      div.innerHTML = `
+        ⏰ <b>${time}</b>  
+        <br>👤 ${c.nombre}  
+        <br>📞 ${c.telefono}
+        <span class="badge">${c.status || "booked"}</span>
+        <button class="delete" onclick="remove('${time}')">X</button>
+      `;
+
+      list.appendChild(div);
+    });
+  });
+}
+
+function remove(time) {
+  db.ref(`citas/${currentDate}/${time}`).remove().then(load);
+}
+
+function addManual() {
+  const nombre = document.getElementById("nombre").value;
+  const telefono = document.getElementById("telefono").value;
+  const hora = document.getElementById("hora").value;
+
+  db.ref(`citas/${currentDate}/${hora}`).set({
+    nombre,
+    telefono,
+    status: "manual"
+  }).then(load);
+}
+</script>
+
+</body>
+</html>
