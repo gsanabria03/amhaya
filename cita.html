@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agendar Cita | AMHAYA</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #000;
+  color: white;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  color: #ffcc00;
+}
+
+p {
+  color: #9ca3af;
+}
+
+.step {
+  margin-top: 25px;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  border-color: #ffcc00;
+  box-shadow: 0 0 6px rgba(255,204,0,0.4);
+  outline: none;
+}
+
+.slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.slot {
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  background: #111;
+  cursor: pointer;
+  border: 1px solid #333;
+  transition: all 0.25s ease;
+}
+
+.slot:hover {
+  transform: translateY(-3px) scale(1.03);
+  border: 1px solid #ffcc00;
+}
+
+.slot:active {
+  transform: scale(0.95);
+}
+
+.slot.selected {
+  background: #ffcc00;
+  color: black;
+  font-weight: bold;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255,204,0,0.5);
+}
+
+button {
+  margin-top: 25px;
+  width: 100%;
+  padding: 15px;
+  background: #ffcc00;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+.success {
+  margin-top: 20px;
+  color: #22c55e;
+  text-align: center;
+}
+
+.loader {
+  border: 3px solid #333;
+  border-top: 3px solid #ffcc00;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  margin: 15px auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container fade-in">
+
+  <h1>Agenda tu cita</h1>
+  <p>Tienes un problema con tu vehículo? Selecciona una fecha y una hora disponible.</p>
+
+  <!-- Fecha -->
+  <div class="step fade-in">
+    <label>Selecciona fecha</label>
+    <input type="date" id="fecha">
+  </div>
+
+  <!-- Horas -->
+  <div class="step fade-in">
+    <label>Horas disponibles</label>
+    <div id="slots" class="slots"></div>
+  </div>
+
+  <!-- Datos -->
+  <div class="step fade-in">
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="telefono" placeholder="Teléfono">
+  </div>
+
+  <button onclick="reservar()">Confirmar cita</button>
+
+  <div id="msg"></div>
+
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_DOMAIN",
+  databaseURL: "TU_DB_URL",
+  projectId: "TU_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+const horasBase = [
+  "09:00","10:00","11:00","12:00",
+  "14:00","15:00","16:00","17:00"
+];
+
+let horaSeleccionada = null;
+
+document.getElementById("fecha").addEventListener("change", cargarSlots);
+
+function cargarSlots() {
+  const fecha = document.getElementById("fecha").value;
+  const container = document.getElementById("slots");
+  container.innerHTML = "";
+
+  db.ref("citas/" + fecha).once("value", snap => {
+    const ocupadas = snap.val() || {};
+
+    horasBase.forEach(hora => {
+      if (!ocupadas[hora]) {
+        const div = document.createElement("div");
+        div.className = "slot fade-in";
+        div.textContent = hora;
+
+        div.onclick = () => {
+          document.querySelectorAll(".slot").forEach(s => s.classList.remove("selected"));
+          div.classList.add("selected");
+
+          div.style.transform = "scale(1.1)";
+          setTimeout(() => div.style.transform = "", 150);
+
+          horaSeleccionada = hora;
+        };
+
+        container.appendChild(div);
+      }
+    });
+  });
+}
+
+function reservar() {
+  const nombre = document.getElementById("nombre").value;
+  const telefono = document.getElementById("telefono").value;
+  const fecha = document.getElementById("fecha").value;
+  const msg = document.getElementById("msg");
+
+  if (!nombre || !telefono || !fecha || !horaSeleccionada) {
+    alert("Completa todos los campos");
+    return;
+  }
+
+  msg.innerHTML = "<div class='loader'></div>";
+
+  db.ref(`citas/${fecha}/${horaSeleccionada}`).set({
+    nombre,
+    telefono
+  }).then(() => {
+    msg.innerHTML = "<p class='success fade-in'>✅ Cita confirmada</p>";
+  });
+}
+</script>
+
+</body>
+</html>
