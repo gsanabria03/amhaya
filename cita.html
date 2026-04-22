@@ -1,284 +1,380 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMHAYA | Agenda</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AMHAYA | Reserva Profesional</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #000;
-  color: white;
+:root{
+  --bg:#070707;
+  --card:rgba(255,255,255,0.03);
+  --border:rgba(255,255,255,0.08);
+  --text:#f5f5f5;
+  --muted:#a1a1a1;
+  --accent:#ffcc00;
 }
 
-/* layout */
-.container {
-  max-width: 750px;
-  margin: auto;
-  padding: 20px;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-h1 {
-  color: #ffcc00;
+body{
+  font-family: -apple-system, BlinkMacSystemFont, Arial;
+  background: radial-gradient(circle at top, #141414, #070707 60%, #000);
+  color:var(--text);
 }
 
-/* steps system */
-.step {
-  display: none;
-  animation: fade 0.4s ease;
+/* HEADER */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:14px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  backdrop-filter:blur(14px);
+  background:rgba(0,0,0,0.4);
+  border-bottom:1px solid var(--border);
+  z-index:1000;
 }
 
-.step.active {
-  display: block;
+.logo{
+  font-weight:600;
+  letter-spacing:3px;
+  color:var(--accent);
 }
 
-@keyframes fade {
-  from {opacity: 0; transform: translateY(15px);}
-  to {opacity: 1; transform: translateY(0);}
+/* HERO */
+.hero{
+  padding:120px 20px 40px;
+  text-align:center;
 }
 
-/* cards */
-.card {
-  background: #111;
-  padding: 20px;
-  border-radius: 12px;
-  margin-top: 20px;
-  border: 1px solid #222;
+.hero h1{
+  font-size:clamp(32px,5vw,60px);
+  letter-spacing:-1px;
 }
 
-/* inputs */
-input {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 8px;
-  color: white;
+.hero p{
+  max-width:650px;
+  margin:12px auto;
+  color:var(--muted);
+  line-height:1.6;
 }
 
-input:focus {
-  border-color: #ffcc00;
-  outline: none;
+/* CONTAINER */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
 }
 
-/* calendar fake SaaS */
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-  margin-top: 10px;
+/* CARDS */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:18px;
+  transition:.3s ease;
 }
 
-.day {
-  padding: 10px;
-  text-align: center;
-  border-radius: 8px;
-  background: #111;
-  cursor: pointer;
-  border: 1px solid #222;
+.card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(255,204,0,0.3);
 }
 
-.day:hover {
-  border-color: #ffcc00;
+/* TITLES */
+h2{
+  color:var(--accent);
+  margin-bottom:10px;
 }
 
-.day.selected {
-  background: #ffcc00;
-  color: black;
-  font-weight: bold;
+/* SERVICES */
+.services{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+  margin-top:10px;
 }
 
-/* slots */
-.slots {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 15px;
+.service{
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #222;
+  background:#0c0c0c;
+  cursor:pointer;
+  transition:.25s;
 }
 
-.slot {
-  padding: 10px 15px;
-  border-radius: 20px;
-  background: #111;
-  border: 1px solid #333;
-  cursor: pointer;
-  transition: 0.2s;
+.service:hover{
+  border-color:var(--accent);
 }
 
-.slot:hover {
-  transform: translateY(-2px);
-  border-color: #ffcc00;
+.service.active{
+  background:rgba(255,204,0,0.12);
+  border-color:var(--accent);
 }
 
-.slot.selected {
-  background: #ffcc00;
-  color: black;
+/* DATE INPUT */
+input{
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border-radius:10px;
+  border:1px solid #222;
+  background:#0c0c0c;
+  color:#fff;
 }
 
-/* buttons */
-button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 14px;
-  background: #ffcc00;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
+/* SLOTS */
+.slots{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:10px;
 }
 
-button:hover {
-  transform: translateY(-2px);
+.slot{
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #222;
+  text-align:center;
+  cursor:pointer;
+  transition:.2s;
+  background:#0c0c0c;
 }
 
-/* modal */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  display: none;
-  align-items: center;
-  justify-content: center;
+.slot:hover{
+  border-color:var(--accent);
 }
 
-.modal-content {
-  background: #111;
-  padding: 30px;
-  border-radius: 12px;
-  text-align: center;
-  border: 1px solid #ffcc00;
+.slot.selected{
+  background:var(--accent);
+  color:#000;
+  font-weight:bold;
+}
+
+.slot.disabled{
+  opacity:.3;
+  pointer-events:none;
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  margin-top:14px;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:var(--accent);
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
+/* STEP LABEL */
+.step{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+
+/* FOOTER SPACING FIX */
+footer{
+  height:60px;
+}
+
+/* ANIMATION */
+.fade{
+  animation:fade .6s ease;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
 }
 </style>
 </head>
 
 <body>
 
+<header>
+  <div class="logo">AMHAYA</div>
+</header>
+
+<div class="hero fade">
+  <h1>Reserva tu diagnóstico profesional</h1>
+  <p>
+    Sistema de agendamiento automotriz con disponibilidad en tiempo real.
+    Sin esperas. Sin confusión. Solo precisión técnica.
+  </p>
+</div>
+
 <div class="container">
 
-<h1>Agenda tu cita</h1>
+  <!-- STEP 1 -->
+  <div class="card fade">
+    <div class="step">Paso 1</div>
+    <h2>Selecciona el servicio</h2>
 
-<!-- STEP 1 -->
-<div class="step active" id="step1">
-  <div class="card">
-    <h3>1. Tus datos</h3>
-    <input id="nombre" placeholder="Nombre">
-    <input id="telefono" placeholder="Teléfono">
+    <div class="services" id="services">
 
-    <button onclick="nextStep(2)">Continuar</button>
+      <div class="service" data-time="1">
+        Diagnóstico Automotriz
+      </div>
+
+      <div class="service" data-time="0.5">
+        Mecánica Rápida
+      </div>
+
+      <div class="service" data-time="1.5">
+        Revisión Completa
+      </div>
+
+      <div class="service" data-time="1">
+        Detección de Fugas
+      </div>
+
+    </div>
   </div>
-</div>
 
-<!-- STEP 2 -->
-<div class="step" id="step2">
-  <div class="card">
-    <h3>2. Selecciona fecha</h3>
+  <!-- STEP 2 -->
+  <div class="card fade">
+    <div class="step">Paso 2</div>
+    <h2>Selecciona la fecha</h2>
+    <input type="date" id="date">
+  </div>
 
-    <input type="date" id="fecha" onchange="loadSlots()">
-
+  <!-- STEP 3 -->
+  <div class="card fade">
+    <div class="step">Paso 3</div>
+    <h2>Horarios disponibles</h2>
     <div class="slots" id="slots"></div>
-
-    <button onclick="nextStep(3)">Continuar</button>
   </div>
-</div>
 
-<!-- STEP 3 -->
-<div class="step" id="step3">
-  <div class="card">
-    <h3>3. Confirmar</h3>
-    <p id="summary"></p>
+  <!-- STEP 4 -->
+  <div class="card fade">
+    <div class="step">Paso 4</div>
+    <h2>Información del cliente</h2>
 
-    <button onclick="reservar()">Confirmar cita</button>
+    <input id="name" placeholder="Nombre completo">
+    <input id="email" placeholder="Correo electrónico">
+    <input id="phone" placeholder="Teléfono">
+
+    <button onclick="book()">Confirmar cita</button>
   </div>
-</div>
 
 </div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <h2>✅ Cita Confirmada</h2>
-    <p>Te contactaremos pronto</p>
-  </div>
-</div>
+<script type="module">
 
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-<script>
+/* FIREBASE */
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_AUTH",
-  databaseURL: "TU_DB",
-  projectId: "TU_ID"
+  apiKey:"XXX",
+  projectId:"XXX"
 };
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-let selectedDate = null;
+/* STATE */
 let selectedTime = null;
+let selectedService = null;
 
-/* steps */
-function nextStep(step) {
-  document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
-  document.getElementById("step" + step).classList.add("active");
-}
+/* SLOTS */
+const TIMES = ["09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00"];
 
-/* slots */
-const hours = ["09:00","10:00","11:00","12:00","14:00","15:00","16:00"];
+/* SERVICE SELECT */
+document.querySelectorAll(".service").forEach(el=>{
+  el.onclick = ()=>{
+    document.querySelectorAll(".service").forEach(s=>s.classList.remove("active"));
+    el.classList.add("active");
+    selectedService = el.dataset.time;
+    loadSlots();
+  };
+});
 
-function loadSlots() {
-  const date = document.getElementById("fecha").value;
-  selectedDate = date;
+/* DATE */
+document.getElementById("date").addEventListener("change", loadSlots);
+
+async function loadSlots(){
+
+  const date = document.getElementById("date").value;
+  if(!date) return;
+
+  const q = query(collection(db,"appointments"), where("date","==",date));
+  const snap = await getDocs(q);
+
+  const booked = snap.docs.map(d=>d.data().time);
 
   const container = document.getElementById("slots");
   container.innerHTML = "";
 
-  db.ref("citas/" + date).once("value", snap => {
-    const data = snap.val() || {};
+  TIMES.forEach(t=>{
+    const div = document.createElement("div");
+    div.className="slot fade";
 
-    hours.forEach(h => {
-      if (!data[h]) {
-        const div = document.createElement("div");
-        div.className = "slot";
-        div.innerText = h;
+    if(booked.includes(t)){
+      div.classList.add("disabled");
+      div.innerText = t + " ocupado";
+    } else {
+      div.innerText = t;
 
-        div.onclick = () => {
-          document.querySelectorAll(".slot").forEach(s => s.classList.remove("selected"));
-          div.classList.add("selected");
-          selectedTime = h;
-        };
+      div.onclick = ()=>{
+        document.querySelectorAll(".slot").forEach(s=>s.classList.remove("selected"));
+        div.classList.add("selected");
+        selectedTime = t;
+      };
+    }
 
-        container.appendChild(div);
-      }
-    });
+    container.appendChild(div);
   });
 }
 
-/* confirm */
-function reservar() {
-  const nombre = document.getElementById("nombre").value;
-  const telefono = document.getElementById("telefono").value;
+/* BOOK */
+window.book = async function(){
 
-  if (!nombre || !telefono || !selectedDate || !selectedTime) {
-    alert("Completa todo");
+  const name = name.value;
+  const email = email.value;
+  const phone = phone.value;
+  const date = document.getElementById("date").value;
+
+  if(!name || !email || !phone || !date || !selectedTime){
+    alert("Completa todos los campos");
     return;
   }
 
-  db.ref(`citas/${selectedDate}/${selectedTime}`).set({
-    nombre,
-    telefono,
-    status: "booked"
+  await addDoc(collection(db,"appointments"),{
+    name,email,phone,
+    date,
+    time:selectedTime,
+    service:selectedService,
+    status:"booked",
+    createdAt:new Date()
   });
 
-  document.getElementById("modal").style.display = "flex";
-}
+  alert("Cita confirmada 🚗");
+  location.reload();
+};
 </script>
 
 </body>
