@@ -24,11 +24,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-    .card {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.6s ease forwards;
-}
 
 @keyframes fadeUp {
   to {
@@ -173,20 +168,8 @@ body {
       margin: auto;
     }
 
-.card {
-  background: rgba(18,18,18,0.85);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 16px;
-  padding: 28px;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-}
 
-.card:hover {
-  transform: translateY(-8px);
-  border-color: #ffcc00;
-  box-shadow: 0 20px 60px rgba(255,204,0,0.08);
-}
+
 
     h2 {
       color: #ffcc00;
@@ -300,6 +283,21 @@ body {
       font-size: 14px;
       color: #6b7280;
     }
+
+    .card {
+  background: rgba(18,18,18,0.85);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 28px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: #ffcc00;
+  box-shadow: 0 20px 60px rgba(255,204,0,0.08);
+}
   </style>
 </head>
 <body>
