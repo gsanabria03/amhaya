@@ -6,6 +6,14 @@
   <title>Amhaya</title>
   <style>
 
+    :root {
+  --bg: #0b0b0b;
+  --card: #121212;
+  --border: #222;
+  --yellow: #ffcc00;
+  --text: #e5e7eb;
+}
+
     footer {
   text-align: center;
   padding: 20px;
@@ -68,11 +76,12 @@ footer {
   transform: scale(1.2);
 }
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000000;
-      color: #e5e7eb;
-    }
+  margin: 0;
+  font-family: Arial;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
 
     header {
       background: #111111;
@@ -126,13 +135,19 @@ footer {
     }
 
     .card {
-      background: #111111;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 20px rgba(255,204,0,0.1);
-      border: 1px solid #1f1f1f;
-    }
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  transition: all 0.25s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--yellow);
+  box-shadow: 0 15px 40px rgba(255,204,0,0.08);
+}
 
     h2 {
       color: #ffcc00;
