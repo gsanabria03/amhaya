@@ -379,6 +379,15 @@ window.book = async function(){
   alert("Cita confirmada 🚗");
   location.reload();
 };
+
+  flatpickr("#date", {
+  minDate: "today",
+  dateFormat: "Y-m-d",
+  disableMobile: true,
+  onChange: function(selectedDates, dateStr) {
+    loadSlots(); // reutiliza tu lógica Firebase
+  }
+});
 </script>
 
 </body>
