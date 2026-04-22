@@ -4,189 +4,214 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>AMHAYA</title>
-
 <style>
+:root {
+  --bg: #0a0a0a;
+  --surface: rgba(255,255,255,0.04);
+  --surface-strong: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
 
-:root{
-  --bg:#0b0b0b;
-  --card:rgba(20,20,20,0.7);
-  --border:rgba(255,255,255,0.08);
-  --yellow:#ffcc00;
-  --text:#e5e7eb;
+  --text: #eaeaea;
+  --muted: #a1a1a1;
+
+  --accent: #ffcc00;
+
+  --radius: 14px;
+  --radius-lg: 20px;
+
+  --shadow: 0 20px 60px rgba(0,0,0,0.6);
 }
 
-/* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-body{
-  font-family:Arial, sans-serif;
-  background: radial-gradient(circle at top, #1a1a1a 0%, #0b0b0b 60%, #000 100%);
-  color:var(--text);
-  overflow-x:hidden;
-}
-
-/* HEADER */
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 24px;
-  backdrop-filter: blur(12px);
-  background: rgba(10,10,10,0.6);
-  border-bottom:1px solid var(--border);
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.logo img{
-  width:45px;
-}
-
-.logo h1{
-  color:var(--yellow);
-  font-size:20px;
-  letter-spacing:2px;
-}
-
-/* HERO */
-.hero{
-  height:90vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:0 20px;
-}
-
-.hero h2{
-  font-size:52px;
-  color:var(--yellow);
-  opacity:0;
-  transform:translateY(20px);
-  animation:fadeUp 1s ease forwards;
-}
-
-.hero p{
-  max-width:600px;
-  margin-top:15px;
-  color:#aaa;
-  opacity:0;
-  transform:translateY(20px);
-  animation:fadeUp 1s ease forwards;
-  animation-delay:0.2s;
-}
-
-/* BUTTON */
-.btn{
-  margin-top:25px;
-  background:var(--yellow);
-  color:black;
-  padding:12px 20px;
-  border-radius:999px;
-  text-decoration:none;
-  font-weight:bold;
-  transition:0.3s;
-}
-
-.btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 10px 30px rgba(255,204,0,0.2);
-}
-
-/* SECTION */
-.section{
-  padding:80px 20px;
-  max-width:1100px;
-  margin:auto;
-}
-
-/* CARDS */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-}
-
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:22px;
-  backdrop-filter: blur(10px);
-
-  opacity:0;
-  transform:translateY(40px);
-  transition:0.6s ease;
-}
-
-.card.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.card:hover{
-  border-color:var(--yellow);
-  transform:translateY(-6px);
-}
-
-/* TEXT */
-h2{
-  font-size:28px;
-  margin-bottom:20px;
-  color:var(--yellow);
-}
-
-/* FLOATING BTN */
-.floating-btn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:var(--yellow);
-  color:black;
-  padding:14px 20px;
-  border-radius:50px;
-  font-weight:bold;
-  text-decoration:none;
-  z-index:999;
-  box-shadow:0 10px 30px rgba(255,204,0,0.25);
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:40px 20px 80px;
-  border-top:1px solid var(--border);
-  color:#777;
-}
-
-/* ANIMATION */
-@keyframes fadeUp{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-  html, body {
+/* RESET (control total, sin sorpresas) */
+* {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-  body {
-  min-height: 100vh;
-  overflow-x: hidden;
+html, body {
+  height: 100%;
+  background: radial-gradient(circle at top, #151515 0%, #0a0a0a 60%, #000 100%);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* LAYOUT BASE */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+/* TIPOGRAFÍA (esto es lo que vende “seniority”) */
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* HEADER (glass muy sutil, no “gaming”) */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px 28px;
+
+  background: rgba(10,10,10,0.65);
+  backdrop-filter: blur(16px);
+
+  border-bottom: 1px solid var(--border);
+}
+
+/* HERO (controlado, no exagerado) */
+.hero {
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  padding: 0 24px;
+}
+
+.hero h1 {
+  color: var(--text);
+}
+
+.hero span {
+  color: var(--accent);
+}
+
+.hero p {
+  max-width: 680px;
+  margin-top: 16px;
+}
+
+/* BUTTONS (sin ruido visual) */
+.btn {
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 18px;
+  border-radius: 999px;
+
+  background: var(--accent);
+  color: #000;
+
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255,204,0,0.18);
+}
+
+/* CARDS (esto define “calidad percibida”) */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  padding: 24px;
+  backdrop-filter: blur(10px);
+
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  background: var(--surface-strong);
+  border-color: rgba(255,204,0,0.4);
+  transform: translateY(-4px);
+}
+
+/* GRID (proporción limpia, no agresiva) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+/* LISTAS (muy controladas) */
+ul {
+  margin-top: 10px;
+  padding-left: 18px;
+}
+
+li {
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+/* FLOATING CTA (discreto, no invasivo) */
+.floating-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+
+  background: var(--accent);
+  color: #000;
+
+  padding: 14px 18px;
+  border-radius: 999px;
+
+  font-weight: 600;
+  text-decoration: none;
+
+  box-shadow: 0 10px 30px rgba(255,204,0,0.15);
+
+  transition: transform 0.25s ease;
+}
+
+.floating-btn:hover {
+  transform: translateY(-3px);
+}
+
+/* FOOTER (silencioso, elegante) */
+footer {
+  padding: 60px 20px 80px;
+  text-align: center;
+
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+/* MICRO-INTERACTION BASE (sensación “producto real”) */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 </style>
@@ -251,6 +276,49 @@ footer{
     <p>Pembroke Pines & Hollywood y sus alrededores</p>
   </div>
 </section>
+
+  <div class="card reveal">
+  <h2>🕒 Horario de Atención</h2>
+
+  <div class="hours">
+
+    <div class="day">
+      <span>Monday</span>
+      <span>8:00 AM – 6:00 PM</span>
+    </div>
+
+    <div class="day">
+      <span>Tuesday</span>
+      <span>8:00 AM – 6:00 PM</span>
+    </div>
+
+    <div class="day">
+      <span>Wednesday</span>
+      <span>8:00 AM – 6:00 PM</span>
+    </div>
+
+    <div class="day">
+      <span>Thursday</span>
+      <span>8:00 AM – 6:00 PM</span>
+    </div>
+
+    <div class="day highlight">
+      <span>Friday</span>
+      <span>8:00 AM – 5:00 PM</span>
+    </div>
+
+    <div class="day closed">
+      <span>Saturday</span>
+      <span>Closed</span>
+    </div>
+
+    <div class="day closed">
+      <span>Sunday</span>
+      <span>Closed</span>
+    </div>
+
+  </div>
+</div>
 
 <footer>
   © 2026 AMHAYA | Automotive Specialist
