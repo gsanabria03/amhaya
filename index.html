@@ -13,6 +13,27 @@
   --yellow: #ffcc00;
   --text: #e5e7eb;
 }
+    .services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+button {
+  background: var(--yellow);
+  color: black;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255,204,0,0.2);
+}
 
     footer {
   text-align: center;
