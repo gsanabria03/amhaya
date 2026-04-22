@@ -1,439 +1,272 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amhaya</title>
-  <style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AMHAYA</title>
 
-    :root {
-  --bg: #0b0b0b;
-  --card: #121212;
-  --border: #222;
-  --yellow: #ffcc00;
-  --text: #e5e7eb;
-}
-    h1 {
-  font-size: 22px;
-  margin-bottom: 10px;
-  color: #ffcc00;
+<style>
+
+:root{
+  --bg:#0b0b0b;
+  --card:rgba(20,20,20,0.7);
+  --border:rgba(255,255,255,0.08);
+  --yellow:#ffcc00;
+  --text:#e5e7eb;
 }
 
-h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-    
-
-button {
-  background: var(--yellow);
-  color: black;
-  border: none;
-  padding: 14px 18px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(255,204,0,0.2);
-}
-
-
-    .cta-wrapper {
-  position: relative;
-}
-
-
-.socials {
-  margin-top: 10px;
-}
-
-.socials a {
-  display: inline-block;
-  margin: 0 10px;
-  transition: 0.2s;
-}
-
-.socials img {
-  width: 28px;
-  height: 28px;
-  filter: grayscale(100%);
-}
-
-.socials a:hover img {
-  filter: none;
-  transform: scale(1.2);
-}
-body {
-  margin: 0;
-  font-family: Arial;
-  color: #e5e7eb;
+body{
+  font-family:Arial, sans-serif;
   background: radial-gradient(circle at top, #1a1a1a 0%, #0b0b0b 60%, #000 100%);
+  color:var(--text);
+  overflow-x:hidden;
 }
 
-    header {
-      background: #111111;
-      padding: 15px 20px;
-      border-bottom: 3px solid #ffcc00;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .logo img {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-    }
-
-    .logo h1 {
-      margin: 0;
-      color: #ffcc00;
-      font-size: 26px;
-      letter-spacing: 1px;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 40px 20px;
-      background: linear-gradient(180deg, #000000, #111111);
-    }
-
-    .hero h2 {
-      font-size: 32px;
-      color: #ffcc00;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      color: #9ca3af;
-      font-size: 18px;
-    }
-
-    .container {
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-
-
-
-    h2 {
-      color: #ffcc00;
-    }
-
-.services {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 24px;
+  backdrop-filter: blur(12px);
+  background: rgba(10,10,10,0.6);
+  border-bottom:1px solid var(--border);
 }
 
-.service-card {
-  background: #111;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #222;
-  transition: 0.3s ease;
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.service-card:hover {
-  transform: translateY(-5px);
-  border-color: #ffcc00;
-  box-shadow: 0 0 15px rgba(255,204,0,0.15);
+.logo img{
+  width:45px;
 }
 
-.service-card h1 {
-  font-size: 18px;
-  color: #ffcc00;
+.logo h1{
+  color:var(--yellow);
+  font-size:20px;
+  letter-spacing:2px;
 }
 
-.service-card p {
-  color: #d1d5db;
-  font-size: 14px;
-  line-height: 1.5;
+/* HERO */
+.hero{
+  height:90vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:0 20px;
 }
 
-.service-card ul {
-  padding-left: 18px;
+.hero h2{
+  font-size:52px;
+  color:var(--yellow);
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeUp 1s ease forwards;
 }
 
-.service-card li {
-  margin-bottom: 6px;
-  color: #cbd5e1;
+.hero p{
+  max-width:600px;
+  margin-top:15px;
+  color:#aaa;
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeUp 1s ease forwards;
+  animation-delay:0.2s;
 }
 
-.featured {
-  border: 1px solid #ffcc00;
+/* BUTTON */
+.btn{
+  margin-top:25px;
+  background:var(--yellow);
+  color:black;
+  padding:12px 20px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
 }
 
-    .links a {
-      display: block;
-      margin: 10px 0;
-      text-decoration: none;
-      color: white;
-      background: #1f1f1f;
-      padding: 12px;
-      border-radius: 8px;
-      text-align: center;
-      transition: 0.3s;
-      border: 1px solid #333;
-    }
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(255,204,0,0.2);
+}
 
-    .links a:hover {
-      background: #ffcc00;
-      color: #000;
-    }
+/* SECTION */
+.section{
+  padding:80px 20px;
+  max-width:1100px;
+  margin:auto;
+}
 
-    .whatsapp-btn {
-      display: block;
-      text-align: center;
-      background: #ffcc00;
-      color: black;
-      padding: 15px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 18px;
-      margin-top: 20px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+/* CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
 
-    .whatsapp-btn:hover {
-      background: #e6b800;
-    }
-
-  
-    .floating-btn:hover {
-      background: #e6b800;
-    }
-
-    .card {
-  background: rgba(18,18,18,0.85);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 16px;
-  padding: 28px;
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px;
   backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.6s ease;
 }
 
-.card:hover {
-  transform: translateY(-8px);
-  border-color: #ffcc00;
-  box-shadow: 0 20px 60px rgba(255,204,0,0.08);
+.card.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
-    .floating-btn {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 1000;
-  background: #ffcc00;
-  color: black;
-  padding: 15px 25px;
-  border-radius: 50px;
-  font-weight: bold;
-  box-shadow: 0 0 15px rgba(255,204,0,0.4);
-  transition: 0.3s;
+.card:hover{
+  border-color:var(--yellow);
+  transform:translateY(-6px);
 }
 
-footer {
-  text-align: center;
-  padding: 20px 20px 80px;
-  color: #6b7280;
-  border-top: 1px solid #222;
+/* TEXT */
+h2{
+  font-size:28px;
+  margin-bottom:20px;
+  color:var(--yellow);
 }
 
-    .service-card {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.6s ease forwards;
+/* FLOATING BTN */
+.floating-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--yellow);
+  color:black;
+  padding:14px 20px;
+  border-radius:50px;
+  font-weight:bold;
+  text-decoration:none;
+  z-index:999;
+  box-shadow:0 10px 30px rgba(255,204,0,0.25);
 }
 
-.service-card:nth-child(2) { animation-delay: 0.1s; }
-.service-card:nth-child(3) { animation-delay: 0.2s; }
-.service-card:nth-child(4) { animation-delay: 0.3s; }
-.service-card:nth-child(5) { animation-delay: 0.4s; }
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:40px 20px 80px;
+  border-top:1px solid var(--border);
+  color:#777;
+}
 
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* ANIMATION */
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
   }
 }
-    
-    
-  </style>
+
+</style>
 </head>
+
 <body>
 
 <header>
   <div class="logo">
-    <!-- PON TU LOGO AQUÍ -->
-    <img src="logo.png" alt="Amhaya Logo">
+    <img src="logo.png">
     <h1>AMHAYA</h1>
   </div>
 </header>
 
-<div class="hero">
-  <h2>Tu mecánico de confianza en la zona</h2>
-  <p>En AMHAYA, el servicio está respaldado por un técnico certificado en electrónica automotriz, con conocimiento especializado en sistemas modernos de vehículos.
+<!-- HERO -->
+<section class="hero">
+  <h2>Automotive Electrical Specialist</h2>
+  <p>
+    Diagnóstico avanzado y reparación automotriz profesional en Pembroke Pines & Hollywood. Tecnología, precisión y experiencia certificada.
+  </p>
+  <a class="btn" href="#services">Ver Servicios</a>
+</section>
 
-Esto nos permite trabajar con:
-  <p>- Sistemas eléctricos complejos</p>
-  <p>- Diagnóstico avanzado</p>
-  <p>- Tecnologías actuales de vehículos</p>
-No solo reparamos, entendemos cómo funciona tu vehículo a nivel técnico.</p>
-</div>
-
-<div class="container">
-
-  <div class="card">
+<!-- LOCATION -->
+<section class="section">
+  <div class="card reveal">
     <h2>📍 Zona de Servicio</h2>
-    <p>Atendemos exclusivamente en <strong>Pembroke Pines</strong> y <strong>Hollywood</strong> y sus alrededores.</p>
-    <p>Servicio local, confiable y con atención directa.</p>
+    <p>Pembroke Pines & Hollywood, Florida</p>
   </div>
+</section>
 
-<div class="card">
+<!-- SERVICES -->
+<section class="section" id="services">
   <h2>🔧 Servicios</h2>
 
-  <div class="services">
+  <div class="grid">
 
-    <div class="service-card">
-      <h1>⚙️ Herramientas Especializadas e Información Técnica</h1>
-      <p>
-        Trabajamos con equipos de diagnóstico avanzados y herramientas especializadas que nos permiten identificar fallas con precisión, sin depender de pruebas innecesarias o reemplazos al azar.
-      </p>
-      <p>
-        Contamos con acceso a información técnica actualizada de fabricantes, diagramas eléctricos, especificaciones de fábrica y procedimientos profesionales. Esto garantiza que cada intervención en tu vehículo se realice siguiendo estándares correctos y seguros.
-      </p>
-      <p>
-        Nuestro enfoque no es “probar suerte”, es diagnosticar con base técnica real.
-      </p>
+    <div class="card reveal">
+      <h3>Diagnóstico Avanzado</h3>
+      <p>Escaneo profesional de sistemas electrónicos y análisis real del vehículo.</p>
     </div>
 
-    <div class="service-card">
-      <h1>🧠 Diagnóstico Automotriz Profesional</h1>
-      <p>
-        Antes de cambiar piezas, primero entendemos el problema. Realizamos diagnósticos completos utilizando escáner automotriz y análisis electrónico.
-      </p>
-
-      <p><strong>Esto permite:</strong></p>
-      <ul>
-        <li>Evitar gastos innecesarios</li>
-        <li>Detectar problemas ocultos</li>
-        <li>Resolver fallas desde el origen</li>
-      </ul>
-
-      <p><strong>Ideal para:</strong></p>
-      <ul>
-        <li>Check engine encendido</li>
-        <li>Fallas eléctricas</li>
-        <li>Problemas intermitentes</li>
-        <li>Vehículos ya revisados sin solución</li>
-      </ul>
+    <div class="card reveal">
+      <h3>Sistemas Eléctricos</h3>
+      <p>Resolución de fallas complejas en módulos, sensores y cableado.</p>
     </div>
 
-    <div class="service-card">
-      <h1>🔩 Mecánica Rápida</h1>
-
-      <p>Soluciones eficientes para problemas comunes:</p>
-
-      <ul>
-        <li>Mantenimiento básico</li>
-        <li>Reemplazo de componentes comunes</li>
-        <li>Ajustes mecánicos esenciales</li>
-      </ul>
+    <div class="card reveal">
+      <h3>Mecánica General</h3>
+      <p>Mantenimiento eficiente y soluciones rápidas con precisión técnica.</p>
     </div>
 
-    <div class="service-card">
-      <h1>🔍 Revisión Completa del Sistema</h1>
-
-      <p>Realizamos inspecciones detalladas para evaluar el estado general del vehículo.</p>
-
-      <p><strong>Se revisa:</strong></p>
-      <ul>
-        <li>Sistema eléctrico</li>
-        <li>Componentes principales</li>
-        <li>Funcionamiento general</li>
-      </ul>
-
-      <p><strong>Ideal para:</strong></p>
-      <ul>
-        <li>Compra de vehículos usados</li>
-        <li>Mantenimiento preventivo</li>
-        <li>Diagnóstico general</li>
-      </ul>
-
-      <p>Te damos una visión clara y honesta del estado real de tu vehículo.</p>
+    <div class="card reveal">
+      <h3>Inspección Completa</h3>
+      <p>Evaluación total del estado del vehículo antes de compra o mantenimiento.</p>
     </div>
 
-    <div class="service-card">
-      <h1>💧 Detección de Fugas</h1>
-
-      <p>
-        Las fugas pueden causar daños graves si no se detectan a tiempo.
-      </p>
-
-      <p><strong>Trabajamos con:</strong></p>
-      <ul>
-        <li>Fugas visibles y ocultas</li>
-        <li>Problemas de presión o pérdida de fluidos</li>
-        <li>Diagnóstico de origen de la fuga</li>
-      </ul>
-
-      <p>
-        Evita daños mayores y gastos innecesarios con una detección temprana.
-      </p>
+    <div class="card reveal">
+      <h3>Detección de Fugas</h3>
+      <p>Identificación precisa de fugas ocultas o visibles en sistemas críticos.</p>
     </div>
 
   </div>
-</div>
-  </div>
-
-</div>
+</section>
 
 <footer>
-  <p>© 2026 AMHAYA | Mecánico en Pembroke Pines & Hollywood FL</p>
-
-  <div class="socials">
-    <!-- TikTok -->
-    <a href="https://www.tiktok.com/@amhayallc" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
-    </a>
-
-    <!-- WhatsApp -->
-    <a href="https://wa.me/+13475539327" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-    </a>
-  </div>
+  © 2026 AMHAYA | Automotive Specialist
 </footer>
 
-  <div class="cta-wrapper">
-<a class="floating-btn" href="https://wa.me/+13475539327" target="_blank">
-  💬 Contáctanos
+<a class="floating-btn" href="https://wa.me/13475539327">
+  💬 WhatsApp
 </a>
-  </div>
 
 <script>
-  console.log("AMHAYA listo 🚗");
+// SCROLL REVEAL (Apple style simple)
+const cards = document.querySelectorAll('.card');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+}, {
+  threshold: 0.15
+});
+
+cards.forEach(card => {
+  observer.observe(card);
+});
 </script>
 
 </body>
