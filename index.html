@@ -3,217 +3,205 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AMHAYA</title>
+<title>AMHAYA | Automotive Electronics Specialist</title>
+
 <style>
-:root {
-  --bg: #0a0a0a;
-  --surface: rgba(255,255,255,0.04);
-  --surface-strong: rgba(255,255,255,0.07);
-  --border: rgba(255,255,255,0.08);
-
-  --text: #eaeaea;
-  --muted: #a1a1a1;
-
-  --accent: #ffcc00;
-
-  --radius: 14px;
-  --radius-lg: 20px;
-
-  --shadow: 0 20px 60px rgba(0,0,0,0.6);
+:root{
+  --bg:#070707;
+  --text:#f2f2f2;
+  --muted:#a1a1a1;
+  --accent:#ffcc00;
+  --border:rgba(255,255,255,0.08);
 }
 
-/* RESET (control total, sin sorpresas) */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* GLOBAL */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,Inter,Arial;
+  background:radial-gradient(circle at top,#151515 0%,#070707 60%,#000 100%);
+  color:var(--text);
+  overflow-x:hidden;
 }
 
-html, body {
-  height: 100%;
-  background: radial-gradient(circle at top, #151515 0%, #0a0a0a 60%, #000 100%);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+/* HEADER */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:1000;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:14px 24px;
+
+  background:rgba(10,10,10,0.6);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
 }
 
-/* LAYOUT BASE */
-.container {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 80px 24px;
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-/* TIPOGRAFÍA (esto es lo que vende “seniority”) */
-h1, h2, h3 {
-  letter-spacing: -0.02em;
+.logo img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
 }
 
-h1 {
-  font-size: clamp(28px, 3vw, 44px);
-  font-weight: 600;
+.logo h1{
+  font-size:16px;
+  letter-spacing:3px;
+  color:var(--accent);
 }
 
-h2 {
-  font-size: 24px;
-  font-weight: 500;
-  color: var(--text);
+/* SECTIONS */
+.section{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:120px 24px;
 }
 
-p {
-  color: var(--muted);
-  line-height: 1.7;
+/* HERO */
+.hero{
+  text-align:center;
+  flex-direction:column;
 }
 
-/* HEADER (glass muy sutil, no “gaming”) */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 16px 28px;
-
-  background: rgba(10,10,10,0.65);
-  backdrop-filter: blur(16px);
-
-  border-bottom: 1px solid var(--border);
+.hero h1{
+  font-size:clamp(38px,5vw,72px);
+  letter-spacing:-0.04em;
 }
 
-/* HERO (controlado, no exagerado) */
-.hero {
-  min-height: 85vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-  padding: 0 24px;
+.hero span{
+  color:var(--accent);
 }
 
-.hero h1 {
-  color: var(--text);
+.hero p{
+  max-width:720px;
+  margin-top:16px;
+  color:var(--muted);
+  line-height:1.6;
 }
 
-.hero span {
-  color: var(--accent);
+/* CTA BUTTON */
+.btn{
+  margin-top:24px;
+  display:inline-block;
+  padding:14px 22px;
+  border-radius:999px;
+  background:var(--accent);
+  color:#000;
+  font-weight:600;
+  text-decoration:none;
+  transition:.25s;
 }
 
-.hero p {
-  max-width: 680px;
-  margin-top: 16px;
+.btn:hover{
+  transform:translateY(-3px);
 }
 
-/* BUTTONS (sin ruido visual) */
-.btn {
-  margin-top: 24px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 12px 18px;
-  border-radius: 999px;
-
-  background: var(--accent);
-  color: #000;
-
-  font-weight: 600;
-  text-decoration: none;
-
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+/* CARDS */
+.container{
+  max-width:1100px;
+  width:100%;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(255,204,0,0.18);
+.card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:26px;
+  margin-top:20px;
+  transition:.3s;
 }
 
-/* CARDS (esto define “calidad percibida”) */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-
-  padding: 24px;
-  backdrop-filter: blur(10px);
-
-  transition: all 0.25s ease;
+.card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(255,204,0,0.4);
 }
 
-.card:hover {
-  background: var(--surface-strong);
-  border-color: rgba(255,204,0,0.4);
-  transform: translateY(-4px);
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
 }
 
-/* GRID (proporción limpia, no agresiva) */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
+/* SERVICES */
+.service{
+  padding:18px;
+  border-radius:14px;
+  border:1px solid #1f1f1f;
+  background:rgba(0,0,0,0.3);
+  transition:.25s;
 }
 
-/* LISTAS (muy controladas) */
-ul {
-  margin-top: 10px;
-  padding-left: 18px;
+.service:hover{
+  border-color:var(--accent);
+  transform:translateY(-4px);
 }
 
-li {
-  color: var(--muted);
-  margin-bottom: 6px;
+/* TEXT */
+h2{
+  color:var(--accent);
+  margin-bottom:10px;
 }
 
-/* FLOATING CTA (discreto, no invasivo) */
-.floating-btn {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-
-  background: var(--accent);
-  color: #000;
-
-  padding: 14px 18px;
-  border-radius: 999px;
-
-  font-weight: 600;
-  text-decoration: none;
-
-  box-shadow: 0 10px 30px rgba(255,204,0,0.15);
-
-  transition: transform 0.25s ease;
+p{
+  color:var(--muted);
+  line-height:1.6;
 }
 
-.floating-btn:hover {
-  transform: translateY(-3px);
+ul{
+  margin-top:10px;
+  padding-left:18px;
 }
 
-/* FOOTER (silencioso, elegante) */
-footer {
-  padding: 60px 20px 80px;
-  text-align: center;
-
-  color: var(--muted);
-  border-top: 1px solid var(--border);
+li{
+  color:var(--muted);
+  margin-bottom:6px;
 }
 
-/* MICRO-INTERACTION BASE (sensación “producto real”) */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s ease;
+/* FLOATING CTA */
+.floating{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:var(--accent);
+  color:#000;
+  padding:14px 18px;
+  border-radius:999px;
+  font-weight:600;
+  text-decoration:none;
+  z-index:999;
 }
 
-.reveal.show {
-  opacity: 1;
-  transform: translateY(0);
+/* FOOTER FIX (ELIMINA SCROLL INFINITO) */
+footer{
+  padding:80px 20px;
+  text-align:center;
+  border-top:1px solid var(--border);
+  color:var(--muted);
 }
 
+/* reveal animation */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:1s ease;
+}
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
 </style>
 </head>
 
@@ -221,130 +209,107 @@ footer {
 
 <header>
   <div class="logo">
-    <img src="logo.png">
+    <img src="logo.png" />
     <h1>AMHAYA</h1>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="hero">
-  <h2>Tu mecánico de confianza</h2>
+<section class="section hero">
+  <h1>Automotive Electronics <span>Precision</span></h1>
   <p>
-    Diagnóstico avanzado y reparación automotriz profesional en Pembroke Pines & Hollywood. Tecnología, precisión y experiencia certificada.
+    Certified automotive electronics technician specializing in advanced diagnostics, electrical systems, and modern vehicle troubleshooting in Pembroke Pines & Hollywood.
   </p>
-  <a class="btn" href="#services">Ver Servicios</a>
+  <a class="btn" href="https://wa.me/13475539327">Book Inspection</a>
+</section>
+
+<!-- TRUST -->
+<section class="section">
+  <div class="container reveal">
+    <h2>Technical Expertise</h2>
+    <div class="card">
+      <p>
+        We don’t replace parts randomly. We diagnose at system level using professional automotive scan tools, wiring diagrams, and manufacturer-level data.
+      </p>
+    </div>
+  </div>
 </section>
 
 <!-- SERVICES -->
-<section class="section" id="services">
-  <h2>Nuestros Servicios</h2>
-
-  <div class="grid">
-
-    <div class="card reveal">
-      <h3>Diagnóstico Avanzado</h3>
-      <p>Escaneo profesional de sistemas electrónicos y análisis real del vehículo.</p>
-    </div>
-
-    <div class="card reveal">
-      <h3>Sistemas Eléctricos</h3>
-      <p>Resolución de fallas complejas en módulos, sensores y cableado.</p>
-    </div>
-
-    <div class="card reveal">
-      <h3>Mecánica General</h3>
-      <p>Mantenimiento eficiente y soluciones rápidas con precisión técnica.</p>
-    </div>
-
-    <div class="card reveal">
-      <h3>Inspección Completa</h3>
-      <p>Evaluación total del estado del vehículo y su debido mantenimiento.</p>
-    </div>
-
-    <div class="card reveal">
-      <h3>Detección de Fugas</h3>
-      <p>Identificación precisa de fugas ocultas o visibles en sistemas críticos.</p>
-    </div>
-
-  </div>
-</section>
-
-  <!-- LOCATION -->
 <section class="section">
-  <div class="card reveal">
-    <h2>Zonas de Servicio</h2>
-    <p>Pembroke Pines & Hollywood y sus alrededores</p>
+  <div class="container reveal">
+    <h2>Services</h2>
+
+    <div class="grid">
+
+      <div class="service">
+        <h3>Advanced Diagnostics</h3>
+        <p>Electrical and electronic system analysis with precision scanning tools.</p>
+      </div>
+
+      <div class="service">
+        <h3>Electrical Systems</h3>
+        <p>Fault tracing in modern vehicle electrical architectures.</p>
+      </div>
+
+      <div class="service">
+        <h3>Rapid Mechanical Service</h3>
+        <p>Maintenance and essential mechanical repairs.</p>
+      </div>
+
+      <div class="service">
+        <h3>Leak Detection</h3>
+        <p>Professional identification of hidden fluid and pressure leaks.</p>
+      </div>
+
+      <div class="service">
+        <h3>Full Vehicle Inspection</h3>
+        <p>Pre-purchase and preventive system evaluations.</p>
+      </div>
+
+    </div>
   </div>
 </section>
 
-  <div class="card reveal">
-  <h2>🕒 Horario de Atención</h2>
-
-  <div class="hours">
-
-    <div class="day">
-      <span>Monday</span>
-      <span>8:00 AM – 6:00 PM</span>
+<!-- LOCATION -->
+<section class="section">
+  <div class="container reveal">
+    <h2>Service Area</h2>
+    <div class="card">
+      <p>
+        We operate exclusively in <strong>Pembroke Pines</strong> and <strong>Hollywood, Florida</strong>.
+      </p>
     </div>
-
-    <div class="day">
-      <span>Tuesday</span>
-      <span>8:00 AM – 6:00 PM</span>
-    </div>
-
-    <div class="day">
-      <span>Wednesday</span>
-      <span>8:00 AM – 6:00 PM</span>
-    </div>
-
-    <div class="day">
-      <span>Thursday</span>
-      <span>8:00 AM – 6:00 PM</span>
-    </div>
-
-    <div class="day highlight">
-      <span>Friday</span>
-      <span>8:00 AM – 5:00 PM</span>
-    </div>
-
-    <div class="day closed">
-      <span>Saturday</span>
-      <span>Closed</span>
-    </div>
-
-    <div class="day closed">
-      <span>Sunday</span>
-      <span>Closed</span>
-    </div>
-
   </div>
-</div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="section">
+  <div class="container reveal" style="text-align:center;">
+    <h2>Get Your Vehicle Diagnosed Properly</h2>
+    <p>Fast response. Technical accuracy. No guessing.</p>
+    <a class="btn" href="https://wa.me/13475539327">Contact on WhatsApp</a>
+  </div>
+</section>
 
 <footer>
-  © 2026 AMHAYA | Automotive Specialist
+  © 2026 AMHAYA — Automotive Electronics Specialist
 </footer>
 
-<a class="floating-btn" href="https://wa.me/13475539327">
-  💬 Contáctanos
-</a>
+<a class="floating" href="https://wa.me/13475539327">Contact</a>
 
 <script>
-// SCROLL REVEAL (Apple style simple)
-const cards = document.querySelectorAll('.card');
+const items=document.querySelectorAll(".reveal");
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('show');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("active");
     }
   });
-}, {
-  threshold: 0.15
-});
+},{threshold:0.15});
 
-cards.forEach(card => {
-  observer.observe(card);
-});
+items.forEach(i=>obs.observe(i));
 </script>
 
 </body>
